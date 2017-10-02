@@ -1,7 +1,11 @@
 const MenuTemplate = ({ onStartGame }) => (
   <main>
     <h1>Space Ludus</h1>
-    <button onClick={onStartGame}>Begin your legend</button>
+    <card>
+      <p>What is your name?</p>
+      <input type="text" placeholder="Marlonicus" />
+    </card>
+    <button onClick={onStartGame}>Begin</button>
   </main>
 )
 
