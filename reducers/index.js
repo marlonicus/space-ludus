@@ -1,15 +1,14 @@
 import logger from 'redux-logger'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import gladiators from './gladiators'
+import slaves from './slaves'
 import game from './game'
 import player from './player'
 
 const reducers = combineReducers({
-  gladiators,
   game,
   player,
+  slaves,
 })
 
-export const initStore = (initialState = initialState) => {
-  return createStore(reducers, applyMiddleware(logger))
-}
+export const initStore = (initialState = initialState) => 
+  createStore(reducers, applyMiddleware(logger))

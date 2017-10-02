@@ -1,7 +1,7 @@
 import { ifElse, equals, always, length, add, prop } from 'ramda'
 
 import { 
-  START,
+  GAME_START,
   TIME_ADVANCE,
 } from '../actions/game'
 
@@ -25,7 +25,7 @@ const updateTime = ifElse(
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case START:
+    case GAME_START:
       return {
         ...state,
         initialised: true,

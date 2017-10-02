@@ -10,6 +10,7 @@ class HUDContainer extends React.Component {
     const { player, game } = this.props
     
     return <HUDTemplate 
+      name={player.name}
       coins={player.coins}
     />
   }

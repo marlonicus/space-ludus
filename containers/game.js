@@ -34,7 +34,9 @@ class GameContainer extends React.Component {
           </GameTemplate>
           :
           <MenuTemplate 
-            onStartGame={gameActions.start}
+            onStartGame={({ name }) => {
+              gameActions.start({ name })
+            }}
           />
       )
     }

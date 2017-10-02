@@ -11,7 +11,7 @@ import {
 
 export const generateName = () => pickRandomFromArray(NAMES)
 
-export const generateAge = () => getRandomInt(15, 60)
+export const generateAge = () => getRandomInt(15, 50)
 
 export const generateStat = ({ id, label, value }) => ({
   id,
@@ -46,5 +46,11 @@ export const generateCharacter = () => ({
     }),
   ],
 })
+
+export const appraiseCharacter = character => {
+  return character.stats.reduce((prev, curr) => {
+    return prev + curr.base
+  }, 0)
+}
 
 export const generateCharacters = times(generateCharacter)
