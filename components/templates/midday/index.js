@@ -16,7 +16,8 @@ const renderStat = ({ label, base }, index) => (
 )
 
 const renderForSale = (purchaseHandler, prisoner, index) => {
-  const { name, age, stats, value } = prisoner
+  const { value, available, state: prisonerState } = prisoner
+  const { name, age, stats } = prisonerState
   return (
     <card key={index}>
       <style jsx>{`
@@ -31,7 +32,9 @@ const renderForSale = (purchaseHandler, prisoner, index) => {
         { renderStat({ label: `Age`, base: age }, `age`) }
         { mapIndexed(renderStat, stats) }
       </dl>
-      <button onClick={() => purchaseHandler({ value })}>£{ value } - Purchase</button>
+      <button disabled={!available} onClick={() => purchaseHandler({ prisoner, index })}>
+        { available ? `£${ value } - Purchase` : `Purchased!` }
+      </button>
     </card>
   )
 }
@@ -47,6 +50,7 @@ const MiddayTemplate = ({ prisoners, purchaseHandler }) => {
       `}</style>
       
       <h1>It's midday</h1>
+      <hr />
       <p>A space caravan has arrived with some prisoners for sale:</p>
       
       <div className="prisoners">
