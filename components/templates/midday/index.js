@@ -32,7 +32,7 @@ const renderForSale = (purchaseHandler, prisoner, index) => {
         { renderStat({ label: `Age`, base: age }, `age`) }
         { mapIndexed(renderStat, stats) }
       </dl>
-      <button disabled={!available} onClick={() => purchaseHandler({ prisoner, index })}>
+      <button disabled={!available} onClick={() => purchaseHandler({ prisoner })}>
         { available ? `£${ value } - Purchase` : `Purchased!` }
       </button>
     </card>
@@ -48,9 +48,6 @@ const MiddayTemplate = ({ prisoners, purchaseHandler }) => {
           display: flex;
         }
       `}</style>
-      
-      <h1>It's midday</h1>
-      <hr />
       <p>A space caravan has arrived with some prisoners for sale:</p>
       
       <div className="prisoners">

@@ -29,21 +29,21 @@ class MiddayContainer extends React.Component {
     })
   }
   
-  removePrisoner({ index }) {
+  removePrisoner({ prisonerId }) {
     const { prisoners } = this.state
     this.setState({
-      prisoners: mapIndexed((prisoner, prisonerIndex) => ({
+      prisoners: map(prisoner => ({
           ...prisoner,
-          available: index === prisonerIndex ? false : prisoner.available,
+          available: prisoner.state.id === prisonerId ? false : prisoner.available,
       }), prisoners)
     })
   }
   
-  prisonerPurchaseHandler({ prisoner, index, purchaseAction, addSlaveAction, playerCoins }) {
+  prisonerPurchaseHandler({ prisoner, purchaseAction, addSlaveAction, playerCoins }) {
     if (playerCoins >= prisoner.value) {
       purchaseAction({ value: prisoner.value })
       addSlaveAction({ character: prisoner.state })
-      this.removePrisoner({ index })
+      this.removePrisoner({ prisonerId: prisoner.state.id })
     }
   }
   
@@ -57,7 +57,7 @@ class MiddayContainer extends React.Component {
     
     return <MiddayTemplate
       prisoners={this.state.prisoners}
-      purchaseHandler={({ prisoner, index }) => this.prisonerPurchaseHandler({ prisoner, index, purchaseAction, playerCoins, addSlaveAction })}
+      purchaseHandler={({ prisoner }) => this.prisonerPurchaseHandler({ prisoner, purchaseAction, playerCoins, addSlaveAction })}
     />
   }
 }

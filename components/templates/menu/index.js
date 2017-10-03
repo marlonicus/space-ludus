@@ -9,7 +9,7 @@ const MenuTemplate = ({ onStartGame }) => {
         <input ref={node => nameNode = node} type="text" placeholder="Marlonicus" />
       </card>
       <button onClick={() => {
-        onStartGame({ name: nameNode.value })
+        onStartGame({ name: nameNode.value || `Marlonicus` })
       }}>Begin</button>
     </main>
   )

@@ -1,7 +1,9 @@
+import uuid from 'uuid'
+import { times } from 'ramda'
+
 import { NAMES } from '../constants/names' 
 import { STAT_ID } from '../constants/stats' 
 
-import { times } from 'ramda'
 
 import { 
   pickRandomFromArray,
@@ -21,6 +23,7 @@ export const generateStat = ({ id, label, value }) => ({
 })
 
 export const generateCharacter = () => ({
+  id: uuid(),
   name: generateName(),
   age: generateAge(),
   stats: [
