@@ -1,4 +1,7 @@
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import HUDContainer from '../../../containers/hud'
+import LudusContainer from '../../../containers/ludus'
+import CaravanContainer from '../../../containers/caravan'
 
 export const GameTemplate = ({ children }) => (
   <div className="wrapper">
@@ -17,7 +20,15 @@ export const GameTemplate = ({ children }) => (
     <div className="hud">
       <HUDContainer />
     </div>
-    { children }
+    <Tabs>
+      <TabList>
+        <Tab><button>Caravan</button></Tab>
+        <Tab><button>Ludus</button></Tab>
+      </TabList>
+      
+      <TabPanel><CaravanContainer /></TabPanel>
+      <TabPanel><LudusContainer /></TabPanel>
+    </Tabs>
   </div>
 )
 

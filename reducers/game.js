@@ -1,27 +1,12 @@
-import { ifElse, equals, always, length, add, prop } from 'ramda'
-
 import { 
   GAME_START,
-  TIME_ADVANCE,
+  DAY_ADVANCE,
 } from '../actions/game'
 
-const GAME_TIMES = [
-  { name: 'Night' },
-  { name: 'Morning' },
-  { name: 'Midday' },
-  { name: 'Evening'}
-]
-
 const initialState = {
-  time: 2,
+  day: 0,
   initialised: false,
 }
-
-const updateTime = ifElse(
-  equals(length(GAME_TIMES)),
-  always(0),
-  add(1),
-)
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -31,10 +16,10 @@ export default (state = initialState, action) => {
         initialised: true,
       }
       
-    case TIME_ADVANCE:
+    case DAY_ADVANCE:
       return {
         ...state,
-        time: updateTime(prop('time', state))
+        day: state.day + 1,
       }
   
     default: return state

@@ -11,6 +11,21 @@ const Page = () => (
       /*# sourceMappingURL=bare.min.css.map */
       
       main { padding: 20px; }
+      
+      .react-tabs__tab-list {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+      }
+      
+      .react-tabs__tab {
+        opacity: 0.6;
+      }
+      .react-tabs__tab--selected {
+        position: relative;
+        opacity: 1;
+      }
     `}</style>
     <GameContainer />
   </main>
