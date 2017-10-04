@@ -6,20 +6,25 @@ const renderSlave = slave => {
   <CharacterCard
     key={slave.id}
     character={slave}
-  >
-    Owned
-  </CharacterCard>
+  />
 )}
 
 const LudusTemplate = ({ slaves }) => {
   return (
   <div>
     <style jsx>{`
-      div {
+      .slaves {
         display: flex;
       }
     `}</style>
-    { map(renderSlave, slaves.slaves) }
+    { 
+      slaves.length ? 
+        <div class="slaves">
+          { map(renderSlave, slaves) }
+        </div>
+        :
+        [<p><em>Looks like you have no slaves!<br />Perhaps you should see if there are any for sale at the caravan.</em></p>]
+    }
   </div>
 )}
 

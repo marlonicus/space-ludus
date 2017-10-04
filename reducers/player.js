@@ -1,6 +1,10 @@
+import {
+  ADD_SLAVE,
+} from '../actions/slave'
+
 import { 
   GAME_START,
-  TIME_ADVANCE,
+  DAY_ADVANCE,
 } from '../actions/game'
 
 import {
@@ -8,8 +12,8 @@ import {
 } from '../actions/player'
 
 const initialState = {
-  coins: 100,
-  
+  coins: 100,  
+  slaves: [],
 }
 
 export default (state = initialState, action) => {
@@ -20,10 +24,22 @@ export default (state = initialState, action) => {
         ...state,
       }
       
+    case DAY_ADVANCE:
+      return {
+        ...state,
+        coins: state.coins - state.slaves.length,
+      }
+      
     case PURCHASE:
       return {
         ...state,
         coins: state.coins - action.payload.value,
+      }
+    
+    case ADD_SLAVE:
+      return {
+        ...state,
+        slaves: [...state.slaves, action.payload.character],
       }
     default: return state
   }

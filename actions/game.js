@@ -5,6 +5,7 @@ export const dayAdvance = () => ({
   type: DAY_ADVANCE,
   payload: {
     numberOfPrisoners: Math.floor(Math.random() * 5) - 1,
+    numberOfWarriors: Math.floor(Math.random() * 5) - 1,
   }
 })
 
@@ -13,5 +14,6 @@ export const start = ({ name }) => ({
   payload: {
     name,
     numberOfPrisoners: 5,
+    numberOfWarriors: 3,
   }
 })

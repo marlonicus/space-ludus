@@ -17,9 +17,9 @@ const HUDTemplate = ({ name, coins, slaves, day, advanceTimeHandler }) => (
       `}</style>
       <h5>{ name }</h5>
       <hr />
-      <p>Day: { day }</p>
-      <p>Coins: { coins }</p>
-      <p>Slaves: { slaves }</p>
+      <p><b>Day:</b> { day }</p>
+      <p><b>Coins:</b> { coins } <small>(-{slaves} per day)</small></p>
+      <p><b>Slaves:</b> { slaves }</p>
       
       <button onClick={advanceTimeHandler}>End day ></button>
     </aside>
