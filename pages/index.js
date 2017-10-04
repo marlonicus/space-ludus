@@ -22,6 +22,14 @@ const Page = () => (
       .react-tabs__tab {
         opacity: 0.6;
       }
+      
+      .react-tabs__tab button, .react-tabs__tab button:hover {
+        border-bottom: none;
+        box-shadow: none !important;
+      }
+      
+      
+      
       .react-tabs__tab--selected {
         position: relative;
         opacity: 1;
