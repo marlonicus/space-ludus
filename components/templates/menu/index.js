@@ -3,7 +3,7 @@ const MenuTemplate = ({ onStartGame }) => {
   
   return (
     <main>
-      <h1>Space Ludus</h1>
+      <h1>Ludus</h1>
       <card>
         <p>What is your name?</p>
         <input ref={node => nameNode = node} type="text" placeholder="Marlonicus" />

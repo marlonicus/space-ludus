@@ -1,13 +1,12 @@
 import { map } from 'ramda'
 import CharacterCard from '../../atoms/character-card'
 
-const renderSlave = slave => {
-  return (
+const renderSlave = slave => (
   <CharacterCard
     key={slave.id}
     character={slave}
   />
-)}
+)
 
 const LudusTemplate = ({ slaves }) => {
   return (
@@ -19,11 +18,11 @@ const LudusTemplate = ({ slaves }) => {
     `}</style>
     { 
       slaves.length ? 
-        <div class="slaves">
+        <div className="slaves" key={'foo'}>
           { map(renderSlave, slaves) }
         </div>
         :
-        [<p><em>Looks like you have no slaves!<br />Perhaps you should see if there are any for sale at the caravan.</em></p>]
+        [<p key="no-slaves"><em>Looks like you have no slaves!<br />Perhaps you should see if there are any for sale at the caravan.</em></p>]
     }
   </div>
 )}

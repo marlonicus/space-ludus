@@ -7,6 +7,7 @@ const renderForSale = (purchaseHandler, prisoner, index) => {
   <CharacterCard
     key={index}
     character={prisoner.character}>
+      <hr />
       <button disabled={!prisoner.available} onClick={() => purchaseHandler({ prisoner })}>
         { prisoner.available ? `£${ prisoner.value } - Purchase` : `Purchased!` }
       </button>

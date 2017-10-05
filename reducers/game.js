@@ -4,7 +4,7 @@ import {
 } from '../actions/game'
 
 const initialState = {
-  day: 0,
+  day: 1,
   initialised: false,
 }
 

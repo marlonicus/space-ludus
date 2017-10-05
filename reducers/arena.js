@@ -14,8 +14,13 @@ import {
   ADD_SLAVE as SLAVE_PURCHASED,
 } from '../actions/slave'
 
+import {
+  BATTLE_START,
+} from '../actions/arena'
+
 const initialState = {
   warriors: [],
+  inBattle: false,
 }
 
 const applyWarriorProps = character => ({
@@ -30,6 +35,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         warriors: numberOfWarriors > 0 ? map(applyWarriorProps, generateCharacters(numberOfWarriors)) : [],
+      }
+      
+    case BATTLE_START:
+      return {
+        ...state,
+        inBattle: true,
       }
   
     default: return state

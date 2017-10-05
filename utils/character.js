@@ -27,6 +27,20 @@ export const generateCharacter = () => ({
   name: generateName(),
   age: generateAge(),
   stats: [
+    // Hit Points
+    generateStat({
+      id: STAT_ID.HP,
+      label: `HP`,
+      value: getRandomInt(30, 100), 
+    }),
+    
+    // Action Points
+    generateStat({
+      id: STAT_ID.AP,
+      label: `Stamina`,
+      value: getRandomInt(70, 100), 
+    }),
+    
     // Strength
     generateStat({
       id: STAT_ID.STR,
@@ -52,7 +66,7 @@ export const generateCharacter = () => ({
 
 export const appraiseCharacter = character => {
   return character.stats.reduce((prev, curr) => {
-    return prev + curr.base
+    return prev + (curr.id === STAT_ID.HP || curr.id === STAT_ID.AP ? Math.floor(curr.base / 10) : curr.base)
   }, 0)
 }
 

@@ -7,6 +7,10 @@ const Stat = ({ label, base }, index) => (
         display: flex;
         justify-content: space-between;
       }
+      
+      dt {
+        font-weight: bold;
+      }
     `}</style>
     
     <dt>{ label }</dt>
@@ -28,6 +32,7 @@ const CharacterCard = ({ character, children }) => {
       <h2>{ name }</h2>
       <dl>
         <Stat label="Age" base={age} />
+        <hr />
         { mapIndexed(Stat, stats) }
       </dl>
       { children }
