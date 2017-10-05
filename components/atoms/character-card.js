@@ -1,6 +1,8 @@
+import { STAT_ID } from '../../constants/stats'
+
 import { mapIndexed } from '../../utils/misc'
 
-const Stat = ({ label, base }, index) => (
+const Stat = ({ id, label, base, current }, index) => (
   <div key={index}>
     <style jsx>{`
       div {
@@ -14,7 +16,9 @@ const Stat = ({ label, base }, index) => (
     `}</style>
     
     <dt>{ label }</dt>
-    <dd>{ base }</dd>
+    <dd>{
+      id === STAT_ID.HP || id === STAT_ID.AP ? `${current} / ` : ``
+    }{ base }</dd>
   </div>
 )
 

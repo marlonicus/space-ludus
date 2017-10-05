@@ -9,17 +9,16 @@ import GameTemplate from '../components/templates/game'
 import MenuTemplate from '../components/templates/menu'
 
 class GameContainer extends React.Component {
-    render({ time, initialised, dispatch } = this.props) {
+    render() {
+      const { time, initialised, dispatch, inBattle } = this.props
       const gameActions = bindActionCreators(GameActions, dispatch)
       
       return (
         initialised ? 
-          <GameTemplate />
+          <GameTemplate inBattle={inBattle} />
           :
           <MenuTemplate 
-            onStartGame={({ name }) => {
-              gameActions.start({ name })
-            }}
+            onStartGame={({ name }) => gameActions.start({ name })}
           />
       )
     }

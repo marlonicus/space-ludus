@@ -1,8 +1,9 @@
 import { connect } from 'react-redux'
 import { pick } from 'ramda'
 
+import { startBattle } from '../actions/game'
+
 import ArenaTemplate from '../components/templates/arena'
-import { startBattle } from '../actions/arena'
 
 class ArenaContainer extends React.Component {
   state = {

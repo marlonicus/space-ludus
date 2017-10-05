@@ -1,5 +1,7 @@
 import uuid from 'uuid'
-import { times } from 'ramda'
+import { 
+  times, prop, find, equals, pipe, curry, reduce, partialRight, any,
+  propEq, partial, ifElse, always, contains } from 'ramda'
 
 import { NAMES } from '../constants/names' 
 import { STAT_ID } from '../constants/stats' 
@@ -11,13 +13,24 @@ import {
 } from './misc'
 
 
-export const generateName = () => pickRandomFromArray(NAMES)
+export const generateName = partial(pickRandomFromArray)([NAMES])
 
-export const generateAge = () => getRandomInt(15, 50)
+export const generateAge = partial(getRandomInt)([15, 50])
 
-export const generateStat = ({ id, label, value }) => ({
+export const getStats = prop('stats')
+export const getStatCurrent = prop('current')
+export const getStatBase = prop('base')
+export const getStatId = prop('id')
+
+export const statIdEquals = curry(propEq)('id')
+export const statIdEqualsStrength = statIdEquals(STAT_ID.STR)
+
+export const getStrengthCurrentValue = pipe(getStats, find(statIdEqualsStrength), getStatCurrent)
+
+export const generateStat = ({ id, label, value, multiplier = 1 }) => ({
   id,
   label,
+  multiplier,
   current: value,
   base: value,
 })
@@ -31,13 +44,15 @@ export const generateCharacter = () => ({
     generateStat({
       id: STAT_ID.HP,
       label: `HP`,
+      multiplier: 10,
       value: getRandomInt(30, 100), 
     }),
     
     // Action Points
     generateStat({
       id: STAT_ID.AP,
-      label: `Stamina`,
+      label: `AP`,
+      multiplier: 10,
       value: getRandomInt(70, 100), 
     }),
     
@@ -64,10 +79,13 @@ export const generateCharacter = () => ({
   ],
 })
 
-export const appraiseCharacter = character => {
-  return character.stats.reduce((prev, curr) => {
-    return prev + (curr.id === STAT_ID.HP || curr.id === STAT_ID.AP ? Math.floor(curr.base / 10) : curr.base)
-  }, 0)
-}
+export const appraiseCharacter = 
+  pipe(
+    getStats,
+    reduce((prev, curr) => {
+      const divider = prop('multiplier', curr)
+      return prev + Math.floor(getStatBase(curr) / divider)
+    }, 0)
+  )
 
 export const generateCharacters = times(generateCharacter)

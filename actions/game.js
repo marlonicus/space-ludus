@@ -1,5 +1,14 @@
 export const GAME_START = `GAME_START`
 export const DAY_ADVANCE = `DAY_ADVANCE`
+export const BATTLE_START = `BATTLE_START`
+
+export const startBattle = ({ player, npc }) => ({
+  type: BATTLE_START,
+  payload: {
+    player,
+    npc,
+  }
+})
 
 export const dayAdvance = () => ({
   type: DAY_ADVANCE,

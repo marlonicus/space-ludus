@@ -8,15 +8,12 @@ import {
 import { 
   GAME_START,
   DAY_ADVANCE,
+  BATTLE_START,
 } from '../actions/game'
 
 import {
   ADD_SLAVE as SLAVE_PURCHASED,
 } from '../actions/slave'
-
-import {
-  BATTLE_START,
-} from '../actions/arena'
 
 const initialState = {
   warriors: [],

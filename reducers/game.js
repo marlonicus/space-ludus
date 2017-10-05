@@ -1,6 +1,7 @@
 import { 
   GAME_START,
   DAY_ADVANCE,
+  BATTLE_START,
 } from '../actions/game'
 
 const initialState = {
@@ -20,6 +21,15 @@ export default (state = initialState, action) => {
       return {
         ...state,
         day: state.day + 1,
+      }
+      
+    case BATTLE_START:
+      return {
+        ...state,
+        inBattle: {
+          player: action.payload.player,
+          npc: action.payload.npc,
+        },
       }
   
     default: return state
