@@ -5,13 +5,13 @@ import LudusTemplate from '../components/templates/ludus'
 
 class LudusContainer extends React.Component {
   render() {
-    const { player } = this.props
+    const { game } = this.props
     return (
       <LudusTemplate
-        slaves={player.slaves} 
+        slaves={game.slaves} 
       />
     )
   }
 }
 
-export default connect(pick(['player']))(LudusContainer)
+export default connect(pick(['game']))(LudusContainer)

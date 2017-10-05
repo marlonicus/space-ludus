@@ -1,5 +1,5 @@
 import { STAT_ID } from '../constants/stats'
-import { pick, find, prop , pipe, equals} from 'ramda'
+import { find, prop , pipe, equals} from 'ramda'
 import { connect } from 'react-redux'
 import { getStrengthCurrentValue } from '../utils/character'
 
@@ -21,13 +21,9 @@ const withInjury = ({ character, damage }) => ({
 class BattleContainer extends React.Component {
   componentWillMount() {
     this.setState({
-      player: this.props.game.inBattle.player,
-      npc: this.props.game.inBattle.npc,
+      player: this.props.inBattle.player,
+      npc: this.props.inBattle.npc,
     })
-    
-    const character = this.props.game.inBattle.player
-    
-    console.log(`geStat: `, getStrengthCurrentValue(character))
   }
   
   checkDeath() {
@@ -55,4 +51,4 @@ class BattleContainer extends React.Component {
   }
 }
 
-export default connect(pick(['game']))(BattleContainer)
+export default connect(prop('game'))(BattleContainer)

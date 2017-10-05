@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { pick } from 'ramda'
+import { pick, partial } from 'ramda'
 
 import { dayAdvance } from '../actions/game'
 
@@ -9,16 +9,16 @@ import { generateCharacters } from '../utils/character'
 
 class HUDContainer extends React.Component {
   render() {
-    const { player, game, dispatch } = this.props
+    const { game, dispatch } = this.props
     
     return <HUDTemplate 
-      name={player.name}
-      coins={player.coins}
+      name={game.name}
+      coins={game.coins}
       day={game.day}
-      slaves={player.slaves.length}
-      advanceTimeHandler={() => dispatch(dayAdvance())}
+      slaves={game.slaves.length}
+      advanceTimeHandler={partial(dispatch, [dayAdvance()])}
     />
   }
 }
 
-export default connect(pick(['game', 'player']))(HUDContainer)
+export default connect(pick(['game']))(HUDContainer)

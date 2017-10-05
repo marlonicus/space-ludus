@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { pick } from 'ramda'
+import { prop } from 'ramda'
 
 import { startBattle } from '../actions/game'
 
@@ -11,14 +11,14 @@ class ArenaContainer extends React.Component {
   }
   
   render() {
-    const { arena, player, dispatch } = this.props
+    const { warriors, slaves, dispatch } = this.props
     const { choosingSlave } = this.state
     
     return (
       <ArenaTemplate
         choosingSlave={choosingSlave}
-        warriors={arena.warriors}
-        slaves={player.slaves}
+        warriors={warriors}
+        slaves={slaves}
         fightInitiatedHandler={({ character: npc }) => {
           this.setState({
             choosingSlave: true,
@@ -33,4 +33,4 @@ class ArenaContainer extends React.Component {
   }
 }
 
-export default connect(pick(['arena', 'player']))(ArenaContainer)
+export default connect(prop('game'))(ArenaContainer)

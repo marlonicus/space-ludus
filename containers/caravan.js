@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { pick, map } from 'ramda'
 
-import * as PlayerActions from '../actions/player' 
+import * as GameActions from '../actions/game' 
 import * as SlaveActions from '../actions/slave' 
 
 import CaravanTemplate from '../components/templates/caravan'
@@ -20,11 +20,11 @@ class CaravanContainer extends React.Component {
   }
   
   render() {
-    const { dispatch, player, caravan } = this.props
-    const { coins: playerCoins } = player
-    const playerActions = bindActionCreators(PlayerActions, dispatch)
+    const { dispatch, game, caravan } = this.props
+    const { coins: playerCoins } = game
+    const gameActions = bindActionCreators(GameActions, dispatch)
     const slaveActions = bindActionCreators(SlaveActions, dispatch)
-    const purchaseAction = playerActions.purchase
+    const purchaseAction = gameActions.purchase
     const addSlaveAction = slaveActions.addSlave
     
     return (
@@ -36,4 +36,4 @@ class CaravanContainer extends React.Component {
   }
 }
 
-export default connect(pick(['player', 'caravan']))(CaravanContainer)
+export default connect(pick(['game', 'caravan']))(CaravanContainer)
