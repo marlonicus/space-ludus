@@ -1,51 +1,43 @@
-import { STAT_ID } from '../constants/stats'
-import { find, prop , pipe, equals} from 'ramda'
+import { find, prop , pipe, equals, partial, propEq } from 'ramda'
 import { connect } from 'react-redux'
-import { getStrengthCurrentValue } from '../utils/character'
+
+import { injure } from '../actions/game'
+
+import { 
+  getStrengthCurrentValue,
+  getHpCurrentValue,
+  findCharacter,
+} from '../utils/character'
 
 import BattleTemplate from '../components/templates/battle'
 
-const withInjury = ({ character, damage }) => ({
-  ...character,
-  stats: character.stats.map(stat => {
-    if (stat.id === STAT_ID.HP) {
-      return {
-        ...stat,
-        current: stat.current - damage,
-      }
-    }
-    return stat
-  })
-})
-
-class BattleContainer extends React.Component {
-  componentWillMount() {
-    this.setState({
-      player: this.props.inBattle.player,
-      npc: this.props.inBattle.npc,
-    })
+class BattleContainer extends React.Component {  
+  onPlayerAttack({ dispatch, player, npc }) {
+    dispatch(injure({
+      id: npc.id,
+      damage: getStrengthCurrentValue(player),
+    }))
   }
   
-  checkDeath() {
-    // if (getStatthis.state.npc)
+  getPlayerAndNpc() {
+    const { slaves, warriors } = this.props
+    const { playerId, npcId } = this.props.inBattle
+
+    return { 
+      player: findCharacter({ id: playerId, list: slaves }), 
+      npc: findCharacter({ id: npcId, list: warriors }),
+    } 
   }
   
   render() {
-    const { player, npc } = this.state
+    const { dispatch } = this.props
+    const { player, npc } = this.getPlayerAndNpc()
+    
     return (
       <BattleTemplate
         player={player}
         npc={npc}
-        onAttack={() => {
-          this.setState({
-            npc: withInjury({
-              character: this.state.npc,
-              damage: getStrengthCurrentValue(player),
-            })
-          }, () => {
-            this.checkDeath()
-          })
-        }}
+        onAttack={partial(this.onPlayerAttack, [{ dispatch, player, npc }])}
       />
     )
   }

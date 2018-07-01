@@ -4,15 +4,15 @@ import CharacterCard from '../../atoms/character-card'
 
 const renderForSale = (purchaseHandler, prisoner, index) => {
   return (
-  <CharacterCard
-    key={index}
-    character={prisoner.character}>
-      <hr />
-      <button disabled={!prisoner.available} onClick={() => purchaseHandler({ prisoner })}>
-        { prisoner.available ? `£${ prisoner.value } - Purchase` : `Purchased!` }
-      </button>
-  </CharacterCard>
-)
+    <CharacterCard
+      key={index}
+      character={prisoner.character}>
+        <hr />
+        <button disabled={!prisoner.available} onClick={() => purchaseHandler({ prisoner })}>
+          { prisoner.available ? `£${ prisoner.value } - Purchase` : `Purchased!` }
+        </button>
+    </CharacterCard>
+  )
 }
 
 const CaravanTemplate = ({ prisoners, purchaseHandler }) => {

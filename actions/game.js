@@ -2,6 +2,15 @@ export const GAME_START = `GAME_START`
 export const DAY_ADVANCE = `DAY_ADVANCE`
 export const BATTLE_START = `BATTLE_START`
 export const PURCHASE = `PURCHASE`
+export const INJURE = `INJURE`
+
+export const injure = ({ id, damage }) => ({
+  type: INJURE,
+  payload: {
+    id,
+    damage,
+  }
+})
 
 export const purchase = ({ value }) => ({
   type: PURCHASE,
@@ -10,11 +19,11 @@ export const purchase = ({ value }) => ({
   }
 })
 
-export const startBattle = ({ player, npc }) => ({
+export const startBattle = ({ playerId, npcId }) => ({
   type: BATTLE_START,
   payload: {
-    player,
-    npc,
+    playerId,
+    npcId,
   }
 })
 

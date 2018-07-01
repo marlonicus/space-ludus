@@ -14,7 +14,6 @@ import {
 
 
 export const generateName = partial(pickRandomFromArray)([NAMES])
-
 export const generateAge = partial(getRandomInt)([15, 50])
 
 export const getStats = prop('stats')
@@ -24,8 +23,12 @@ export const getStatId = prop('id')
 
 export const statIdEquals = curry(propEq)('id')
 export const statIdEqualsStrength = statIdEquals(STAT_ID.STR)
+export const statIdEqualsHp = statIdEquals(STAT_ID.HP)
 
 export const getStrengthCurrentValue = pipe(getStats, find(statIdEqualsStrength), getStatCurrent)
+export const getHpCurrentValue = pipe(getStats, find(statIdEqualsHp), getStatCurrent)
+
+export const findCharacter = ({ id, list }) => find(propEq('id', id), list)
 
 export const generateStat = ({ id, label, value, multiplier = 1 }) => ({
   id,
@@ -39,6 +42,7 @@ export const generateCharacter = () => ({
   id: uuid(),
   name: generateName(),
   age: generateAge(),
+  isAlive: true,
   stats: [
     // Hit Points
     generateStat({

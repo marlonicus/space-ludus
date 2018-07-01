@@ -25,12 +25,30 @@ const Stat = ({ id, label, base, current }, index) => (
 const CharacterCard = ({ character, children }) => {
   const { name, age, stats } = character
   return (
-    <card>
+    <card className={character.isAlive ? '' : 'dead' }>
       <style jsx>{`
         card {
           margin-right: 10px;
           padding: 10px;
           margin-bottom: 0;
+          position: relative;
+        }
+        
+        .dead {
+          opacity: 0.6;
+        }
+        
+        .dead:before {
+            content: '';
+            display: block;
+            background: red;
+            opacity: 0.2;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+          }
         }
       `}</style>
       <h2>{ name }</h2>

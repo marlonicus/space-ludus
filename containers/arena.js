@@ -10,6 +10,24 @@ class ArenaContainer extends React.Component {
     choosingSlave: false,
   }
   
+  fightStartHandler({ characterId: playerId }) {
+    const { dispatch } = this.props
+    
+    dispatch(
+      startBattle({ 
+        playerId, 
+        npcId: this.state.npcId 
+      })
+    )
+  }
+  
+  fightInitiatedHandler({ characterId: npcId }) {
+    this.setState({
+      choosingSlave: true,
+      npcId,
+    })
+  }
+  
   render() {
     const { warriors, slaves, dispatch } = this.props
     const { choosingSlave } = this.state
@@ -19,15 +37,8 @@ class ArenaContainer extends React.Component {
         choosingSlave={choosingSlave}
         warriors={warriors}
         slaves={slaves}
-        fightInitiatedHandler={({ character: npc }) => {
-          this.setState({
-            choosingSlave: true,
-            npc,
-          })
-        }}
-        fightStartHandler={({ character: player }) => {
-          dispatch(startBattle({ player, npc: this.state.npc }))
-        }}
+        fightInitiatedHandler={(...args) => this.fightInitiatedHandler(...args)}
+        fightStartHandler={(...args) => this.fightStartHandler(...args)}
       />
     )
   }
